@@ -10,6 +10,10 @@
 <form class="form-signin" th:action="@{/userLogin}" th:method="post" >
     <img class="mb-4" th:src="@{/login/img/login.jpg}" width="72px" height="72px">
     <h1 class="h3 mb-3 font-weight-normal">请登录</h1>
+    <label>
+        <input type="checkbox" name="rememberme"> 记住我
+    </label>
+
     <!-- 用户登录错误信息提示框 -->
     <div th:if="${param.error}"
          style="color: red;height: 40px;text-align: left;font-size: 1.1em">
