@@ -17,6 +17,23 @@ class LowversionApplicationTests {
 	@Autowired
 	private RabbitTemplate rabbitTemplate;
 	@Test
+	public void topicPublisher() {
+		rabbitTemplate.convertAndSend("topic_exchange"
+				,
+				"info.email"
+				,
+				"topics send email message");
+		rabbitTemplate.convertAndSend("topic_exchange"
+				,
+				"info.sms"
+				,
+				"topics send sms message");
+		rabbitTemplate.convertAndSend("topic_exchange"
+				,
+				"info.email.sms"
+				,
+				"topics send email and sms message");}
+	@Test
 	public void routingPublisher() {
 		rabbitTemplate.convertAndSend("routing_exchange"
 				,
