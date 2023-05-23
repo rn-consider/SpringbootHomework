@@ -1,6 +1,8 @@
 package com.example.lowversion;
 
+import com.example.lowversion.service.SendEmailService;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
 import org.springframework.amqp.core.AmqpAdmin;
 import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.FanoutExchange;
@@ -8,41 +10,19 @@ import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 
-
+@RunWith(SpringRunner.class)
 @SpringBootTest
-class LowversionApplicationTests {
+public class LowversionApplicationTests {
 	@Autowired
-	private AmqpAdmin amqpAdmin;
-	@Autowired
-	private RabbitTemplate rabbitTemplate;
-
+	private SendEmailService sendEmailService;
 	@Test
-	public void topicPublisher() {
-		rabbitTemplate.convertAndSend("topic_exchange"
-				,
-				"info.email"
-				,
-				"topics send email message");
-		rabbitTemplate.convertAndSend("topic_exchange"
-				,
-				"info.sms"
-				,
-				"topics send sms message");
-		rabbitTemplate.convertAndSend("topic_exchange"
-				,
-				"info.email.sms"
-				,
-				"topics send email and sms message");
-	}
-
-	@Test
-	public void routingPublisher() {
-		rabbitTemplate.convertAndSend("routing_exchange"
-				,
-				"error_routing_key"
-				,
-				"routing send info message");
+	public void sendSimpleMailTest() {
+		String to="123151231@qq.com";
+		String subject="【纯文本邮件】标题";
+		String text="Spring Boot纯文本邮件发送内容测试.....";
+		sendEmailService.sendSimpleEmail(to,subject,text);
 	}
 }
