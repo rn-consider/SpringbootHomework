@@ -11,4 +11,9 @@ public class FilmController {
     public String toDetail(@PathVariable("type")String type,
                            @PathVariable("path")String path) {
         return "detail/"+type+"/"+path;
-    }}
+    }
+    @GetMapping("/userLogin")
+    public String toLoginPage() {
+        return "login/login";
+    }
+}

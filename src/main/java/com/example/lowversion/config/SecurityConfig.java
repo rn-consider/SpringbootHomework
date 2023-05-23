@@ -29,11 +29,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/").permitAll()
+                .antMatchers("/login/**").permitAll()
                 .antMatchers("/detail/common/**").hasAuthority("common")
                 .antMatchers("/detail/vip/**").hasAuthority("vip")
                 .anyRequest().authenticated()
                 .and()
-                .formLogin();
+                .formLogin()
+                    .loginPage("/userLogin").permitAll()
+                    .usernameParameter("name").passwordParameter("pwd")
+                    .defaultSuccessUrl("/")
+                    .failureUrl("/userLogin?error");
     }
-
 }
