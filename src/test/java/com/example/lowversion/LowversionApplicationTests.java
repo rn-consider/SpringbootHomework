@@ -17,6 +17,14 @@ class LowversionApplicationTests {
 	@Autowired
 	private RabbitTemplate rabbitTemplate;
 	@Test
+	public void routingPublisher() {
+		rabbitTemplate.convertAndSend("routing_exchange"
+				,
+				"error_routing_key"
+				,
+				"routing send info message");
+	}
+	@Test
 	public void psubPublisher() {
 		Person person=new Person();
 		person.setAge(15);
