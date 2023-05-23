@@ -19,7 +19,7 @@ class LowversionApplicationTests {
 	@Test
 	public void psubPublisher() {
 		Person person=new Person();
-		person.setAge(1);
+		person.setAge(15);
 		person.setName("shitou");
 //第一个参数表示定义的交换器名称，第二个表示路由键，第三个表示消息内容
 		rabbitTemplate.convertAndSend("fanout_exchange"
